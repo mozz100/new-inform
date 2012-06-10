@@ -1,0 +1,57 @@
+<head>
+  <title>inform</title>
+</head>
+
+<body>
+    {{> board }}
+</body>
+
+<template name="board">
+  <div id="board">
+    {{#with current_board }}
+      <div id="title" class="editable">{{ title }}</div>
+    {{/with}}
+    <div id="thing_block">
+      {{# each things}}
+        {{> thing}}
+      {{/each}}
+    </div>
+    <div id="board_message">
+      {{#with current_board }}
+        <span class="editable" id="message">{{ message }}</span>
+      {{/with}}
+    </div>
+  </div>
+
+
+
+
+  {{# if selected_thing }}
+    <div class="editor">
+      {{>  thing_editor selected_thing }}
+    </div>
+  {{/if}}
+  {{# if selected_board_attribute }}
+    <div class="editor board_editor">
+      {{>  board_editor selected_board_attribute }}
+    </div>
+  {{/if}}
+</template>
+
+<template name="thing">
+  <div class="thing {{selected}}">
+    <span class="name">{{name}}</span> is currently
+    <span class="">{{status}}</span>
+  </div>
+</template>
+
+<template name="thing_editor">
+  <input type="text" id="name" value="{{ name }}" /> is currently
+  <input type="text" id="status" value="{{ status }}" />
+  <input type="button" id="update_thing" value="Update" />
+</template>
+
+<template name="board_editor">
+  <input type="text" id="txt" value="{{ val }}" />
+  <input type="button" id="update_board" value="Update" />
+</template>
